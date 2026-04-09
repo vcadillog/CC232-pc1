@@ -192,20 +192,22 @@ debugging de algunos errores, se validó mediante la lectura del código y la ej
 
 ## RESUMEN DE PROFILING
 
-El profiling dió el siguiente resultado:
+## Resultados de Profiling
 
- 50.00      0.06     0.06 183321836     0.00     0.00  LoopCounter::increment(unsigned long long)
- 25.00      0.09     0.03 15016476     0.00     0.01  countOnes1(unsigned int, LoopCounter&)
- 16.67      0.11     0.02                             _init
-  8.33      0.12     0.01      102    98.04   932.21  CountOnesArray::compute(unsigned int, int (*)(unsigned int, LoopCounter&), LoopCounter&)
-  0.00      0.12     0.00      204     0.00     0.00  LoopCounter::reset()
-  0.00      0.12     0.00      102     0.00    48.18  CountOnesArray::computeOptimized(unsigned int, LoopCounter&)
-  0.00      0.12     0.00      102     0.00     0.00  LoopCounter::get() const
-  0.00      0.12     0.00      102     0.00     0.00  std::vector<int, std::allocator<int> >::reserve(unsigned long)
-  0.00      0.12     0.00      100     0.00     0.00  std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::operator()()
-  0.00      0.12     0.00        4     0.00     0.00  std::_Vector_base<int, std::allocator<int> >::~_Vector_base()
-  0.00      0.12     0.00        2     0.00     0.00  LoopCounter::LoopCounter()
-  0.00      0.12     0.00        1     0.00     0.00  std::mersenne_twister_engine<unsigned long, 32ul, 624ul, 397ul, 31ul, 2567483615ul, 11ul, 4294967295ul, 7ul, 2636928640ul, 15ul, 4022730752ul, 18ul, 1812433253ul>::_M_gen_rand()
+| % Tiempo | Tiempo total | Tiempo propio | Llamadas     | Promedio propio | Promedio total | Función                                                                 |
+|----------|--------------|---------------|--------------|-----------------|----------------|-------------------------------------------------------------------------|
+| 50.00    | 0.06         | 0.06          | 183321836    | 0.00            | 0.00           | LoopCounter::increment(unsigned long long)                              |
+| 25.00    | 0.09         | 0.03          | 15016476     | 0.00            | 0.01           | countOnes1(unsigned int, LoopCounter&)                                  |
+| 16.67    | 0.11         | 0.02          | —            | —               | —              | _init                                                                   |
+| 8.33     | 0.12         | 0.01          | 102          | 98.04           | 932.21         | CountOnesArray::compute(unsigned int, int (*)(unsigned int, LoopCounter&), LoopCounter&) |
+| 0.00     | 0.12         | 0.00          | 204          | 0.00            | 0.00           | LoopCounter::reset()                                                    |
+| 0.00     | 0.12         | 0.00          | 102          | 0.00            | 48.18          | CountOnesArray::computeOptimized(unsigned int, LoopCounter&)            |
+| 0.00     | 0.12         | 0.00          | 102          | 0.00            | 0.00           | LoopCounter::get() const                                                |
+| 0.00     | 0.12         | 0.00          | 102          | 0.00            | 0.00           | std::vector<int, std::allocator<int> >::reserve(unsigned long)          |
+| 0.00     | 0.12         | 0.00          | 100          | 0.00            | 0.00           | std::mersenne_twister_engine<...>::operator()()                         |
+| 0.00     | 0.12         | 0.00          | 4            | 0.00            | 0.00           | std::_Vector_base<int, std::allocator<int> >::~_Vector_base()           |
+| 0.00     | 0.12         | 0.00          | 2            | 0.00            | 0.00           | LoopCounter::LoopCounter()                                              |
+| 0.00     | 0.12         | 0.00          | 1            | 0.00            | 0.00           | std::mersenne_twister_engine<...>::_M_gen_rand()                        |
 
 Como se puede observar lo que se ejecuta más es el observable que nos permite saber cuántas veces se ejecuta un bucle,
 después es la función countOnes y en tercer lugar es la clase que crea el array de salida.
