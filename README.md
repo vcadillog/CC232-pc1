@@ -1,3 +1,83 @@
+# Reporte de Solución
+
+## Integrantes
+- Gustavo Anthony Arzubialde Fierro - 20230205H
+- Victor Hugo Cadillo Gutierrez - 20255514D
+
+## Problema asignado
+Problema 6 Counting Bits: Contar el número de bits en 1 en la representación binaria de un número entero.
+
+## Enlace al enunciado de LeetCode
+[[LeetCode - Number of 1 Bits]](https://leetcode.com/problems/counting-bits/description/)
+
+## Especificación breve del problema
+Dado un número entero `n`, devolver un **arreglo** donde cada posición `i` (0 ≤ i ≤ n) contenga la cantidad de bits en 1 de la representación binaria de `i`.  
+En otras palabras, se debe calcular el número de bits en 1 para todos los enteros desde 0 hasta `n` inclusive y mostrar el resultado en forma de array.
+
+## Entrada y salida
+- **Entrada:** un entero `n`.
+- **Salida:** un **arreglo** de tamaño `n + 1` donde cada posición `i` contiene el número de bits en 1 de la representación binaria de `i`, para todo `i` en el rango [0, n].
+
+## Tamaño de entrada relevante
+- Para enteros de 32 bits: máximo 32 iteraciones en el peor caso.
+- Para enteros de 64 bits: máximo 64 iteraciones en el peor caso.
+
+## Descripción de la solución
+Se implementaron dos métodos:
+1. **`countOnes1` (Kernighan):** elimina un bit en 1 en cada iteración (`n &= (n-1)`).
+2. **`countOnes2` (reducción paralela):** usa máscaras y sumas parciales para acumular los bits en bloques.
+
+Además, se implementaron funciones para construir arreglos con los resultados (`countOnesArray1` y `countOnesArray2`).
+
+## Justificación de determinismo y factibilidad
+- **Determinismo:** el algoritmo siempre produce el mismo resultado para la misma entrada.
+- **Factibilidad:** el problema es computable en tiempo finito y con recursos razonables.
+
+## Argumento de finitud
+- En `countOnes1`, cada iteración reduce el número de bits en 1, garantizando que el bucle termina.
+- En `countOnes2`, se ejecuta un número fijo de operaciones, siempre finito.
+
+## Argumento de correctitud
+- `countOnes1`: al terminar, `ones` contiene exactamente el número de bits eliminados.
+- `countOnes2`: cada `ROUND` acumula correctamente los bits en bloques, y al final se obtiene el conteo total.
+
+## Invariante
+- En `countOnes1`: **invariante de bucle** → `ones` refleja el número de bits eliminados hasta el momento.
+
+## Monotonicidad
+- En `countOnes1`: el número de bits en 1 de `n` decrece estrictamente en cada iteración.
+- En `countOnes2`: las transformaciones acumulan información de manera ordenada y progresiva.
+
+## Complejidad temporal
+- `countOnes1`: O(log n) (≈ O(1) en enteros fijos).
+- `countOnes2`: O(1).
+- `countOnesArray1`: O(n log n).
+- `countOnesArray2`: O(n).
+
+## Complejidad espacial
+- `countOnes1` y `countOnes2`: O(1).
+- `countOnesArray1` y `countOnesArray2`: O(n).
+
+## Mejor, peor y promedio
+- `countOnes1`: mejor caso O(1), peor caso O(log n), promedio O(log n).
+- `countOnes2`: siempre O(1).
+- `countOnesArray1`: mejor caso O(1), peor caso O(n log n), promedio O(n log n).
+- `countOnesArray2`: mejor caso O(1), peor caso O(n), promedio O(n).
+
+## Ubicación en la jerarquía de crecimiento
+- `countOnes1`: O(log n).
+- `countOnes2`: O(1).
+- `countOnesArray1`: O(n log n).
+- `countOnesArray2`: O(n).
+
+## Alternativa ingenua
+Recorrer bit por bit con desplazamientos y máscaras, contando los unos. Complejidad O(log n), menos eficiente que la reducción paralela.
+
+## Robustez, degeneración y reutilización
+- **Robustez:** maneja correctamente casos extremos como `n = 0` y números con todos los bits en 1.
+- **Degeneración:** `countOnesArray1` puede volverse costoso para valores grandes de `n`.
+- **Reutilización:** funciones encapsuladas (`countOnesX`, `printArray`) favorecen modularidad y reutilización.
+
 ## INSTRUCCIONES PARA COMPILAR
 
 Debido a los requerimientos de la práctica se realiza la compilación de dos formas.
