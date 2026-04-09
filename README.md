@@ -25,6 +25,26 @@ Para compilar con las banderas como la de depuración, etc, hacer en la carpeta 
 chmod +x compilacion.sh
 ```
 
+## INSTRUCCIONES PARA COMPILAR
+
+Los archivos obtenidos por el cmake se pueden ejecutar en la carpeta build de la siguiente manera:
+
+```bash
+./demo_countones
+./benchmark
+```
+
+Los archivos obtenidos por el bash se pueden ejecutar en la carpeta build_with_flags de la siguiente manera:
+```bash
+./coverage
+./profiling
+./test_compacto
+./test_depuracion
+./test_optimizacion
+./test_release
+./test_O1
+./test_O3
+```
 
 ## INSTRUCCIONES PARA EJECUTAR PRUEBAS
 
@@ -33,3 +53,33 @@ En la carpeta build ejecutar:
 ```bash
 ctest
 ```
+
+O también puede ejecutar las pruebas de forma individual usando el ejecutable:
+```bash
+./test_internal
+./test_extra
+./edge_cases
+```
+
+## OBSERVACION DE LOS SANITIZERS
+
+Hubo una advertencia sobre tipos incompatibles entre int y static, que se corrigió y
+no debería haber otro problema ya que no se usan punteros de forma directa en el código, 
+solo en las librerías internas de c++.
+
+## DESCRIPCION DEL BENCHMARK
+
+Se realizo un benchmark para comparar el STL, la versión ingenua y la optimizada.
+La version STL usa instrucciones de CPU por lo que es más rápido aunque realice más bucles que
+la versión optimizada, la versión ingenua recorre uno por uno las opciones hasta hacer todos los bits cero y
+la versión optimizada usa calculos anteriormente obtenidos.
+
+Resultados del benchmark
+
+=== Benchmark (n = 10000000) ===
+
+Metodo              Tiempo (ms)    Operaciones         
+-------------------------------------------------------
+STL                 129            124434633           
+countOnes1          817            124434633           
+Optimizado          299            10000000            
