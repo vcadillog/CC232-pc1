@@ -61,6 +61,21 @@ O también puede ejecutar las pruebas de forma individual usando el ejecutable:
 ./edge_cases
 ```
 
+## TABLA RESUMIDA DE BUILDS Y RESULTADOS
+
+Tabla con resultados obtenidos de ejecutar el comando time en bash y du.
+
+| Build                        | Tiempo de ejecución (s) | Tamaño ejecutable (KB) | Ruta del ejecutable                          |
+|------------------------------|-------------------------|------------------------|----------------------------------------------|
+| Depuración                   | 1.540                   | 128K                   | ./build_with_flags/test_depuracion           |
+| Depuración optimizado        | 0.503                   | 124K                   | ./build_with_flags/test_optimizado           |
+| Release                      | 0.401                   | 128K                   | ./build_with_flags/test_release              |
+| Compacto                     | 0.454                   | 120K                   | ./build_with_flags/test_compacto             |
+| -O1                          | 0.488                   | 128K                   | ./build_with_flags/test_O1                   |
+| -O3 compacto                 | 0.498                   | 136K                   | ./build_with_flags/test_O3                   |
+
+Al ser ejecutables de test y al no activar los asserts, las pruebas se ejecutaron correctamente, siguiendo los comportamientos esperables.
+
 ## OBSERVACION DE LOS SANITIZERS
 
 Hubo una advertencia sobre tipos incompatibles entre int y static, que se corrigió y
@@ -83,3 +98,14 @@ Metodo              Tiempo (ms)    Operaciones
 STL                 129            124434633           
 countOnes1          817            124434633           
 Optimizado          299            10000000            
+
+## DISCUSIÓN SOBRE MICROOPTIMIZACIÓN VS ALGORITMO
+
+Como se puede observar en el reporte sobre los ejecutables, no hay mejoras considerables usando las 
+flags -O1 u -O3, sin embargo la elección de un algoritmo diferente, que reutiliza los cálculos anteriores
+si muestra una mejora considerable, del 250%.
+
+## QUÉ SE USO DE COPILOT Y CÓMO SE VALIDÓ
+
+El asistente IA se utilizó principalmente para obtener un boilerplate de códigos, así como para hacer 
+debugging de algunos errores, se validó mediante la lectura del código y la ejecución de las pruebas.
