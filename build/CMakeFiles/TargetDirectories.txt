@@ -1,9 +1,0 @@
-/home/victor/clases/algoritmos/CC232-pc1/build/CMakeFiles/algorithms.dir
-/home/victor/clases/algoritmos/CC232-pc1/build/CMakeFiles/demo_countones.dir
-/home/victor/clases/algoritmos/CC232-pc1/build/CMakeFiles/test_extra.dir
-/home/victor/clases/algoritmos/CC232-pc1/build/CMakeFiles/test_internal.dir
-/home/victor/clases/algoritmos/CC232-pc1/build/CMakeFiles/edge_cases.dir
-/home/victor/clases/algoritmos/CC232-pc1/build/CMakeFiles/benchmark.dir
-/home/victor/clases/algoritmos/CC232-pc1/build/CMakeFiles/test.dir
-/home/victor/clases/algoritmos/CC232-pc1/build/CMakeFiles/edit_cache.dir
-/home/victor/clases/algoritmos/CC232-pc1/build/CMakeFiles/rebuild_cache.dir

@@ -1,1 +1,0 @@
-/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/demo_countones.dir/link.d CMakeFiles/demo_countones.dir/demos/demo_countones.cpp.o -o demo_countones  libalgorithms.a

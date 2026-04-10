@@ -1,6 +1,0 @@
-pc1_public 0 0
-pc1_internal 2 0.836803
-pc1_edge_cases 4 0.0771227
-pc1_test_internal 2 0.92997
-pc1_test_extr 2 0.00100606
----

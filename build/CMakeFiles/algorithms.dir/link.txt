@@ -1,2 +1,0 @@
-/usr/bin/ar qc libalgorithms.a CMakeFiles/algorithms.dir/src/count_ones.cpp.o CMakeFiles/algorithms.dir/src/count_ones_array.cpp.o CMakeFiles/algorithms.dir/src/loop_counter.cpp.o
-/usr/bin/ranlib libalgorithms.a

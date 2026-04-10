@@ -1,1 +1,0 @@
-/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/test_extra.dir/link.d CMakeFiles/test_extra.dir/tests/test_extra.cpp.o -o test_extra  libalgorithms.a
