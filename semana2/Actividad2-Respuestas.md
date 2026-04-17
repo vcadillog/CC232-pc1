@@ -1,11 +1,9 @@
-## Bloque 0
-
 ### Integrantes: 
 - Victor Hugo Cadillo Gutierrez, 20255514D
 
 ## Bloque 0
 
-###Demo:
+### Demo:
 ```
 victor@victor-desktop:~/clases/algoritmos/CC232-pc/semana2$ ./build/sem2_demo_array_basico
 array.length = 5
@@ -15,7 +13,7 @@ despues de b = a, b.length = 5
 b: 10 20 30 40 50
 nota: esta version de array usa una asignacion por transferencia de ownership.
 ```
-###Prueba pública:
+### Prueba pública:
 ```
 victor@victor-desktop:~/clases/algoritmos/CC232-pc/semana2$ ./build/sem2_test_public_cap2
 ```
