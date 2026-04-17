@@ -8,7 +8,7 @@ La reducción de capacidad también forma parte del diseño de un arreglo dinám
 
 ###### DengVector
 ArrayStack
-´´´
+```
     void shrink() {
         if (_capacity <= DEFAULT_CAPACITY * 2) return;
         if (_size * 4 > _capacity) return;
@@ -21,11 +21,11 @@ ArrayStack
         }
         delete[] oldElem;
     }
-´´´
+```
 Si la capacidad es menor a DEFAULT_CAPACITY (para el caso es 3) entonces se reduce el array.
 
 ###### ArrayStack
-´´´
+```
 template<class T>
 void ArrayStack<T>::resize() {
 	array<T> b(max(2 * n, 1));
@@ -33,7 +33,8 @@ void ArrayStack<T>::resize() {
 		b[i] = a[i];
 	a = b;
 }
-´´´
+```
+
 El arreglo se redimensiona al doble de la capacidad actual en ArrayStack.
 
 2. Explicar qué condición debe cumplirse para que una reducción de capacidad sea razonable.
