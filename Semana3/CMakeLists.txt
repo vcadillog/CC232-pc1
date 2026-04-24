@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-option(CC232_ENABLE_DENG_BRIDGE "Build optional Deng bridge demos/tests" OFF)
+option(CC232_ENABLE_DENG_BRIDGE "Build optional Deng bridge demos/tests" ON)
 
 add_library(sem3_headers INTERFACE)
 target_include_directories(sem3_headers INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")

@@ -19,3 +19,49 @@
 8. Expliquen cuál es la idea espacial central de `SEList`.
 9. Expliquen por qué `SEList` reutiliza una `BDeque` basada en `ArrayDeque`.
 10. Expliquen qué papel cumple `DengList` dentro de esta semana y por qué no reemplaza a las estructuras de Morin.
+
+### Bloque 1
+
+Construyan una tabla con cuatro columnas:
+
+- Archivo
+- Salida u observable importante
+- Idea estructural
+- Argumento de costo, espacio o diseño
+
+- `Semana3/demos/demo_sllist.cpp`
+- `Semana3/demos/demo_dllist.cpp`
+- `Semana3/demos/demo_selist.cpp`
+- `Semana3/demos/demo_deng_list.cpp`
+- `Semana3/demos/demo_morin_deng_bridge.cpp`
+- `Semana3/demos/demo_capitulo3_panorama.cpp`
+- `Semana3/demos/demo_min_structures.cpp`
+- `Semana3/demos/demo_xor_list.cpp`
+- `Semana3/demos/demo_linked_adapters.cpp`
+- `Semana3/demos/demo_contiguous_vs_linked.cpp`
+
+SLList size = 3, peek = 0, DLList: 10 20 30 , SEList: 8 6 7 , LinkedStack top = 200, LinkedQueue front = 11, LinkedDeque front/back = 5/9, ArrayDeque first/last = 4/6
+| Archivo | Salida | Idea estructural | Argumento de costo|
+| :--- | :---: | :---: | ---: |
+| demo_sllist | size = 3 , peek = 5, pop = 5, remove = 10 | SLList | |
+| demo_dllist | 10 20 30 |DLList | |
+| demo_selist | 0 10 20 30 40 50 60 70 80 90 | | |
+| demo_deng_list | | | |
+| demo_morin_deng_bridge | | | |
+| demo_capitulo3_panorama | SLList size = 3, peek = 0, DLList: 10 20 30 , SEList: 8 6 7 , LinkedStack top = 200, LinkedQueue front = 11, LinkedDeque front/back = 5/9, ArrayDeque first/last = 4/6 | | |
+| demo_min_structures | MinStack min=3 top=7, MinQueue min=2 front=4, MinDeque min=1 front=3 back=1 | | |
+| demo_xor_list| XorList: 5 10 20 , front=5 back=20 | | |
+| demo_linked_adapters| | | |
+| demo_contiguous_vs_linked| | | |
+
+
+Luego respondan:
+
+1. En `demo_sllist.cpp`, ¿qué secuencia deja más clara la coexistencia de comportamiento tipo pila y tipo cola dentro de `SLList`?
+2. En `demo_dllist.cpp`, ¿qué operación muestra mejor la inserción en una posición intermedia?
+3. En `demo_selist.cpp`, ¿qué observable permite defender que la lista mantiene orden lógico aunque internamente trabaje por bloques?
+4. En `demo_deng_list.cpp`, ¿qué evidencia muestra que la lista reforzada por Deng ofrece operaciones más cercanas a un ADT de lista completo?
+5. En `demo_morin_deng_bridge.cpp`, ¿qué parte de la salida permite justificar que se reutilizan algoritmos sin reescribir la estructura base?
+6. En `demo_min_structures.cpp`, ¿qué diferencia conceptual observan entre almacenar valores y almacenar información adicional para responder `min()`?
+7. En `demo_linked_adapters.cpp`, ¿qué adaptador representa mejor la idea de reutilizar una estructura existente para ofrecer una interfaz nueva?
+8. En `demo_contiguous_vs_linked.cpp`, ¿qué contraste se observa entre acceso por índice, inserción local y localidad de memoria?
