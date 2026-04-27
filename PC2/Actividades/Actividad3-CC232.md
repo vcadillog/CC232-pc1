@@ -3,24 +3,27 @@
 
 ### Bloque 1
 
-1. En el almacenamiento contiguo la información se guarda en el stack, mientras en el dinámico los datos se guardan en el heap.
+1. En el almacenamiento contiguo la información se guarda en un espacio de memoria consecutivo, mientras en el dinámico los datos se acceden con punteros y las listas no necesariamente van a tener punteros con posiciones de memoria consecutiva.
 
-2. El acceso por rango busca en un intervalo de valores, mediante por posición entra al índice lógico.
+2. El acceso por rango está asociado a memoria contigua en arrays, por lo que se puede pedir directamente el elemento i, mientras que el acceso por enlace está asociado a estructuras de listas enlazadas, por lo que para pedir un valor se tiene que recorrer cada nodo ya que no posee un índice.
 
 3. Porque una lista enlazada conoce las posiciones exactas del elemento y los conecta con otros elementos mediante punteros y para modificar la información solo necesita reorganizar a quienes apuntan los punteros, mientras que por índice tiene que mover todos los datos siguientes del arreglo para agregar o remover un dato, pero pierde en acceso por índice porque debe recorrer los punteros en lugar de solo acceder al índice lógico del array.
 
 4. Porque puede acceder directamente al primer o último elemento de la lista enlazada.
 
-5. Porque SLList solo maneja una forma LIFO o FIFO y no simultaneamente.
+5. Porque SLList solo maneja una forma LIFO o FIFO y no puede manejar datos en ambos extremos a la vez.
 
 6. dummy sirve para manejar casos borde en el cual la lista está vacía y pueda realizar insertar o eliminar elementos sin complicar la implementación.
 
 7. Expliquen por qué `DLList` permite justificar `get(i)`, `set(i,x)`, `add(i,x)` y `remove(i)` con costo `O(1 + min(i, n-i))`.
+
 8. Expliquen cuál es la idea espacial central de `SEList`.
+
 9. Expliquen por qué `SEList` reutiliza una `BDeque` basada en `ArrayDeque`.
+
 10. Expliquen qué papel cumple `DengList` dentro de esta semana y por qué no reemplaza a las estructuras de Morin.
 
-### Bloque 1
+### Bloque 2
 
 Construyan una tabla con cuatro columnas:
 

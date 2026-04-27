@@ -1,23 +1,6 @@
 ### Integrantes: 
 - Victor Hugo Cadillo Gutierrez, 20255514D
 
-### Bloque 0
-
-### Demo:
-```
-victor@victor-desktop:~/clases/algoritmos/CC232-pc/semana2$ ./build/sem2_demo_array_basico
-array.length = 5
-contenido: 10 20 30 40 50
-antes de la asignacion, b[0] = -1
-despues de b = a, b.length = 5
-b: 10 20 30 40 50
-nota: esta version de array usa una asignacion por transferencia de ownership.
-```
-### Prueba pública:
-```
-victor@victor-desktop:~/clases/algoritmos/CC232-pc/semana2$ ./build/sem2_test_public_cap2
-```
-
 ### Bloque 1
 
 1. Memoria contigua es cuando el uso de la memoria se hace de forma consecutiva
@@ -33,13 +16,16 @@ victor@victor-desktop:~/clases/algoritmos/CC232-pc/semana2$ ./build/sem2_test_pu
 
 ### Bloque 2
 
-TODO: Agregar tabla
-Construyan una tabla con cuatro columnas:
-
-- Archivo
-- Salida u observable importante
-- Idea estructural
-- Argumento de costo o espacio
+| Archivo                           | Salida u observable importante                                  | Idea estructural                                                   | Argumento de costo o espacio                                      |
+|----------------------------------|------------------------------------------------------------------|--------------------------------------------------------------------|-------------------------------------------------------------------|
+| sem2_demo_array_basico           | b = a copia contenido (10 20 30 40 50)                          | Transferencia de ownership en arreglo básico                       | Asignación O(1)                                                   |
+| sem2_demo_arraystack             | remove(1) = 15                                                  | Eliminación de elemento en un arreglo ArrayStack                   | remove(i) cuesta O(n−i) por desplazamientos                       |
+| sem2_demo_arraystack_explicado   | Se insertan o eliminan elementos, capacity crece 1 → 2 → 4      | Redimensionamiento por duplicación                                 | push_back amortizado O(1)                                         |
+| sem2_demo_fastarraystack         | Inserción de elementos: 0 1 2 99 3 4 5                          | Arreglo dinámico similar a ArrayStack con inserción por índice     | add(i,x) cuesta O(n−i) por desplazamientos                        |
+| sem2_demo_rootisharraystack      | remove(3) = 30                                                  | Eliminación de elemento en un arreglo con bloques de tamaño creciente | Espacio desperdiciado O(√n), mejor que arreglos con duplicación de espacio |
+| sem2_demo_rootisharraystack_explicado | Bloques crecen 1,2,3,...                                    | Representación por bloques con conversión de indices/bloques       | Espacio desperdiciado O(√n), mejor que arreglos con duplicación de espacio |
+| sem2_demo_deng_vector            | capacity crece duplicandose según size: 3 → 6 → 12              | Vector dinámico con redimensionamiento                             | Inserciones amortizadas O(1) y otras operaciones O(n)             |
+| sem2_demo_stl_vector_contraste   | capacity crece 1 → 2 → 4 → 8                                    | Vector estándar (duplicación de capacidad)                         | push_back amortizado O(1), hasta la mitad de espacio desperdiciado |
 
 1. La longitud del array se declara al momento de crear el array, y la implementación del array reemplaza la operación de asignación con operator= para primero liberar la memoria asignada al array y sobreescribir la longitud y desreferencia el nuevo array.
 2. Todas las operaciones realizan desplazamientos, push_back llama a add para el elemento final en específico y remove elimina el elemento i y desplaza todo a la izquierda. El que mostraría mejor los desplazamientos sería la operación 3 "add(1,15)" ya que desplaza los elementos a la derecha y luego inserta el valor.
@@ -81,7 +67,11 @@ Construyan una tabla con cuatro columnas:
 
 ### Bloque 6
 
-1. operator[] sobreescribe la operación de obtención de elemento por índice [] y nos permite hacer un assert que verifique que el ingreso del índice sea válido, solo se permite valores positivos y menores a _size.
+1. operator[] sobrecarga la operación de obtención de elemento por índice [] y nos permite hacer un assert que verifique que el ingreso del índice sea válido, solo se permite valores positivos y menores a _size.
 2. find(e) busca elementos igual a e desde el último elemento en el array (indice _size) hacia atrás y si lo encuentra nos retorna el índice y si no nos retorna -1. Si hay más de dos elementos iguales nos retorna la primera coincidencia desde el final del array.
-3. traverse aplica la misma función sobre cada uno de los elementos del array.
-4. 
+3. traverse aplica la misma función sobre cada uno de los elementos de la estructura.
+4. DengVector implementa la estructura de datos vector según las operaciones definidas en la lectura y aunque no es el tema principal de la semana plantea paralelismos y similitudes con otras estructuras de datos estudiadas.
+
+### Bloque 7
+
+Cuando cambiamos de arreglo a una estructura basada en arreglos, la representación cambia a una estructura de datos que maneja un arreglo interno para almacenar los elementos, pero con una interfaz que permite operaciones dinámicas como agregar o eliminar elementos sin preocuparse por la gestión de memoria. La correctitud se asegura mediante el diseño de la interfaz y la implementación de las operaciones, garantizando que las operaciones se comporten según lo esperado. El costo amortizado se mantiene en O(1). En cuanto al uso de espacio, RootishArrayStack es más eficiente en términos de espacio que ArrayStack o FastArrayStack, ya que no necesitan reservar el doble del espacio cada vez que se redimensionan, sino que lo hacen de manera adaptativa en bloques según el tamaño actual del arreglo. FastArrayStack tiene una implementación más eficiente debido al uso de funciones optimizadas de la STL. 
