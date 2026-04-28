@@ -20,6 +20,7 @@ class XorList {
 
     static Node* xorp(Node* a, Node* b) {
         return reinterpret_cast<Node*>(reinterpret_cast<std::uintptr_t>(a) ^ reinterpret_cast<std::uintptr_t>(b));
+        // Que hace esto? Toma dos punteros a nodos, los convierte a enteros sin signo, les aplica la operación XOR bit a bit, y luego convierte el resultado de nuevo a un puntero a nodo. Esto se utiliza para almacenar la dirección de ambos nodos adyacentes en un solo campo, lo que permite recorrer la lista en ambas direcciones sin necesidad de almacenar punteros separados para el siguiente y el anterior.
     }
 
     static Node* next(Node* prev, Node* curr) {

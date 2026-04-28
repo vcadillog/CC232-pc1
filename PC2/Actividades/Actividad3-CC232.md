@@ -26,27 +26,23 @@
 | `demo_capitulo3_panorama.cpp` | SLList size = 3, peek = 0, DLList: 10 20 30, SEList: 8 6 7, LinkedStack top = 200, LinkedQueue front = 11, LinkedDeque front/back = 5/9, ArrayDeque first/last = 4/6 | Recopilación de estructuras estudiadas| Permite comparar principalmente inserciones |
 | `demo_min_structures.cpp` | MinStack min=3 top=7, MinQueue min=2 front=4, MinDeque min=1 front=3 back=1 | Estructuras que almacenan el mínimo | Permite obtener el mínimo en O(1) |
 | `demo_xor_list.cpp` | XorList: 5 10 20, front=5 back=20 | Lista enlazada con operaciones XOR | Comprime el espacio de dos punteros a la mitad usando XOR entre el sucesor y anterior |
-| `demo_linked_adapters.cpp`| LinkedStack: top() = 30, pop() = 30, top() = 20, size() = 2<br>LinkedQueue: front() = 1, remove() = 1, front() = 2, size() = 2<br>LinkedDeque: front() = 10, back() = 40, removeFirst() = 10, removeLast() = 40, front() = 20, back() = 30, size() = 2| Adaptadores de estructuras enlazadas | Reutiliza una estructura base para crear una interfaz con operaciones más concretas|
+| `demo_linked_adapters.cpp`| LinkedStack: top() = 30, pop() = 30, top() = 20, size() = 2<br>LinkedQueue: front() = 1, remove() = 1, front() = 2, size() = 2<br>LinkedDeque: front() = 10, back() = 40, removeFirst() = 10, removeLast() = 40, front() = 20, back() = 30, size() = 2| Adaptadores de estructuras enlazadas | Reutiliza una estructura de lista enlazada para implementar lógicas de pila, cola y deque|
 | `demo_contiguous_vs_linked.cpp` | FIFO: front/remove:1/1, Deque: first/last: a/d, Acceso por indice: get(4) = 40 | Contraste entre estructuras contiguas y enlazadas | El acceso por índice es O(1) en contiguo y O(n) en enlazado, la inserción local es O(n) en contiguo y O(1) en enlazado |
 
-
-1. En `demo_sllist.cpp`, ¿qué secuencia deja más clara la coexistencia de comportamiento tipo pila y tipo cola dentro de `SLList`?
-2. En `demo_dllist.cpp`, ¿qué operación muestra mejor la inserción en una posición intermedia?
-3. En `demo_selist.cpp`, ¿qué observable permite defender que la lista mantiene orden lógico aunque internamente trabaje por bloques?
-4. En `demo_deng_list.cpp`, ¿qué evidencia muestra que la lista reforzada por Deng ofrece operaciones más cercanas a un ADT de lista completo?
-5. En `demo_morin_deng_bridge.cpp`, ¿qué parte de la salida permite justificar que se reutilizan algoritmos sin reescribir la estructura base?
-6. En `demo_min_structures.cpp`, ¿qué diferencia conceptual observan entre almacenar valores y almacenar información adicional para responder `min()`?
-7. En `demo_linked_adapters.cpp`, ¿qué adaptador representa mejor la idea de reutilizar una estructura existente para ofrecer una interfaz nueva?
-8. En `demo_contiguous_vs_linked.cpp`, ¿qué contraste se observa entre acceso por índice, inserción local y localidad de memoria?
+1. En demo_sllist se muestra la secuencia de inserciones 10, 20, 5 y luego se muestra el resultado de peek y pop que devuelve 5, lo que muestra el comportamiento tipo pila, pero luego se muestra el resultado de remove que devuelve 10, propio de un comportamiento tipo cola.
+2. En demo_dllist se muestra add(1,20) la operación de inserción en la posición 1 con el valor 20, lo que demuestra la capacidad de la lista doblemente enlazada para insertar en cualquier posición conocida con un costo O(1).
+3. En demo_selist, el observable get(i) muestra la salida de los elementos en orden lógico (0, 10, 20, 30, 40, 50, 60, 70, 80, 90) a pesar de que internamente se maneja por bloques.
+4. En demo_deng_list se muestra la secuencia de inserciones que da el resultado: 5,30,10,20 y luego se muestra la salida de front, back y to_vector que devuelve 5, 20 y 5 10 20 30 para sort. 
+5. En demo_morin_deng_bridge se muestra la salida de to_vector que devuelve 1 2 3 4, lo que demuestra que se ha convertido un DLList a un tipo compatible con DengList sin modificar la estructura base, sino usando una función puente.
+6. En demo_min_structures se muestra que cada estructura almacena información adicional para responder min() en O(1), MinStack guarda en la estructura el mínimo para cada push, no se cambia la idea estructural de pila o cola, pero se optimiza la busqueda de elementos mínimos.
+7. En demo_linked_adapters, LinkedDeque tiene una implementación que abstrae mejor las operaciones de deque, mientras que en LinkedStack y LinkedQueue al utilizar SLList las operaciones de pila o cola ya eran naturales por lo que la implementación es mínima.
+8. En demo_contiguous_vs_linked, se observa el contraste. El acceso por índice es O(1) en estructuras contiguas, mientras que es O(n) en estructuras de listas enlazadas. La inserción local es O(n), mientras que es O(1) en estructuras de listas enlazadas y la localidad de memoria es mejor en estructuras contiguas porque los datos almacenadas una al lado del otro y en las listas enlazadas la localidad se dispersa ya que los punteros no se almacenan necesariamente en posiciones de memoria consecutivas.
 
 ### Bloque 3
 
 1. Valida size, peek, pop y remove.
-
 2. Valida size, get y remove.
-
 3. Valida size, get y remove.
-
 4. 
  -Para SLList  valida to_vector, secondLast, checkSize. 
  -Para DLList  valida to_vector, isPalindrome, checkSize.
