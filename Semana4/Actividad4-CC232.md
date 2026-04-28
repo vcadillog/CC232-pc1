@@ -10,8 +10,6 @@
 4. Reemplazar recursión implícita por una estructura explícita significa que en lugar de confiar en la pila de llamadas del sistema para manejar el estado de las funciones recursivas, se utiliza una estructura de datos explícita, como una pila o una cola, para almacenar y gestionar el estado de las operaciones. Esto permite abstraer el ADT y reutilizar la lógica de pila o cola.
 5. La información mínima que debe guardarse en una pila para permitir reconstruir una solución parcial es el estado actual del problema que se está resolviendo. Esto puede incluir variables relevantes, decisiones tomadas, y cualquier información necesaria para continuar el proceso desde ese punto específico. Esta información permite que al desapilar, se pueda volver a ese estado y continuar la resolución del problema sin perder el contexto.
 
-6. Compara la conversión de base recursiva e iterativa: ¿qué comparten y qué cambia en el control del proceso?
-
 
 #### Bloque 2 - Demostración y trazado guiado
 
@@ -30,14 +28,14 @@ Luego responde:
 
 1. En demo_stack_queue, la parte de la salida que deja más clara la diferencia entre tope y frente es cuando se muestra el "Tope de la pila = 9" y el "Frente de la cola = 10". Esto resalta que el tope de la pila representa el último elemento agregado (LIFO), mientras que el frente de la cola representa el primer elemento agregado (FIFO). Además, al mostrar el "Elemento desapilado = 9" y el "Elemento desencolado = 10", lo resalta, ya que el elemento desapilado es el último en entrar a la pila, mientras que el elemento desencolado es el primero en entrar a la cola.
 2. En demo_base_conversion, el observable que permite afirmar que las versiones recursiva e iterativa producen la misma representación es el resultado final de la conversión de 12345 en base 8, que es "30071". 
-3. En `demo_paren_rpn.cpp`, la relación entre paréntesis balanceados, RPN y el valor final es que el balanceo de paréntesis es que la expresión tenga una apertura de paréntesis ( asociado a un cierre ) en la jerarquía correcta y los elimina, y pueda ser convertida a notación RPN. Y con la notación RPN, se puede obtener el valor final.
+3. En demo_paren_rpn, la relación entre paréntesis balanceados, RPN y el valor final es que el balanceo de paréntesis es que la expresión tenga una apertura de paréntesis ( asociado a un cierre ) en la jerarquía correcta y los elimina, y pueda ser convertida a notación RPN. Y con la notación RPN, se puede obtener el valor final.
 
 4. En `demo_nqueens.cpp`, ¿qué significan `solutions` y `checks`, y por qué no miden lo mismo?
+4. En demo_nqueens solutions se refiere al número de configuraciones válidas de reinas en el tablero que cumplen con las reglas del juego (es decir, ninguna reina ataca a otra). checks se refiere al número de veces que el algoritmo verifica si una posición es válida para colocar una reina. No miden lo mismo porque `solutions` cuenta solo las configuraciones finales que son correctas, mientras que `checks` cuenta todas las verificaciones realizadas durante el proceso de búsqueda, incluyendo aquellas que resultan en configuraciones inválidas.
 5. En `demo_maze.cpp`, ¿qué muestra la secuencia de coordenadas sobre el camino encontrado?
 6. En `demo_bank.cpp`, ¿qué representa cada lista impresa en cada instante `t`?
 7. En `demo_capitulo4_panorama.cpp`, ¿qué salida resume mejor la idea de que una misma semana reúne estructuras y aplicaciones?
 
-#### Bloque 2 
 #### Bloque 3 
 #### Bloque 4 
 #### Bloque 5 
