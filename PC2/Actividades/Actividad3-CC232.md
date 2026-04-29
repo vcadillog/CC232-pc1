@@ -120,26 +120,23 @@
 6. Similar a stable_sort_with_deng y dedup_with_deng, reverse_with_deng crea un objeto temporal DengList para invertir el orden de los elementos de la lista original usando reverse de DengList, lo que permite reutilizar la lógica de inversión sin modificar la estructura base. 
 7. El costo adicional de la conversión entre estructuras es O(n) debido a la necesidad de recorrer todos los elementos para convertirlos de un tipo a otro dos veces. En general no valdría la pena aceptarlo, pero si se tiene que hacer una nueva estructura más compleja podría considerarse aceptable el costo amortizado sobre el de implementación de lógica en la estructura original.
 
-#### Bloque 7 - Comparación enlazado vs contiguo, variantes y evidencia experimental
+#### Bloque 7 
 
-Revisen:
+1. En ArrayDeque, la representación se basa en un arreglo circular, lo que permite un acceso rápido a los elementos pero pierde en costo inserción y eliminación. En cambio, LinkedDeque utiliza una lista doblemente enlazada, lo que permite una inserción y eliminación eficiente en ambos extremos sin necesidad de redimensionar, pero el acceso a elementos es más costoso. En uno el costo de acceso por índice es O(1) y en el otro es O(n), mientras que el costo de inserción y eliminación en ambos extremos es O(1) para LinkedDeque y O(n) para ArrayDeque.
+2. La localidad de memoria se refiere a la cercanía en memoria de los datos entre sí. En una representación contigua, los elementos están almacenados uno al lado del otro en la memoria, lo que permite que el acceso a los datos sea más eficiente. 
+3. Las operaciones que favorecen más a la representación enlazada son las inserciones y eliminaciones locales, porque solo se reconectan los punteros.
+4. 
+- La comparación entre radom_get_arraydeque y random_get_dllist sirve mejor para ver el acceso aleatorio. ArrayDeque tiene un costo de acceso por índice O(1) y DLLList tiene un costo de acceso por posición O(n).
+- random_get_arraydeque           : 4516
+- random_get_dllist               : 111877
+- Para comparar extremos ver deque_contiguo_arraydeque y deque_enlazado_linkeddeque, aunque ambos tienen un costo O(1) para inserciones y eliminaciones en extremos, el contiguo tiene mejor rendimiento debido a la localidad de memoria.
+- deque_contiguo_arraydeque       : 8140
+- deque_enlazado_linkeddeque      : 4159
 
-- `Semana3/include/ArrayDeque.h`
-- `Semana3/include/XorList.h`
-- `Semana3/demos/demo_contiguous_vs_linked.cpp`
-- `Semana3/demos/demo_xor_list.cpp`
-- `Semana3/benchmarks/benchmark_semana3.cpp`
-- `Parte3-Morin.pdf`
-
-Respondan:
-
-1. Comparen `ArrayDeque` y `LinkedDeque`: ¿qué cambia en representación y qué cambia en costo observable?
-2. ¿Qué significa que una representación contigua tenga mejor localidad de memoria?
-3. ¿Qué tipo de operaciones favorecen más a la representación enlazada?
-4. En el benchmark, ¿qué comparación sirve mejor para discutir acceso aleatorio y cuál sirve mejor para discutir operaciones en extremos?
-5. ¿Por qué el benchmark no debe leerse como prueba absoluta de superioridad de una estructura sobre otra?
-6. ¿Qué idea intenta mostrar `XorList` respecto al ahorro de punteros?
+5. Porque el benchmark mide el rendimiento en casos específicos y puede no reflejar el rendimiento general en todos los escenarios posibles.
+6. XorList demuestra como usando XOR puede reducir el espacio utilizado por los punteros al comprimir un puntero como referencia a sus punteros sucesor y anterior.
 7. ¿Qué desventaja práctica introduce una estructura como `XorList` aunque sea interesante desde el punto de vista del espacio?.
+7. La desventaja práctica de XorList es que el acceso a los elementos se vuelve más complejo y costoso, ya que para acceder a un nodo específico se necesita descomprimir el puntero sucesor y anterior.
 
 #### Bloque 8 - Cierre comparativo y preparación de sustentación
 
