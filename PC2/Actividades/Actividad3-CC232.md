@@ -79,20 +79,7 @@
 11. spread reparte los elementos de un bloque lleno a un bloque vecino. gather junta los elementos de un bloque con un bloque vecino. spread se usa cuando se quiere insertar elementos en un bloque en el futuro de forma eficiente y gather para reducir el espacio utilizado por la estructura de datos.
 12. Un bloque más grande reduce el número de nodos y punteros necesarios, lo que mejora la eficiencia espacial, pero aumenta el costo de acceso a elementos individuales dentro del bloque, ya que se necesita recorrer el bloque para encontrar el elemento deseado. Por otro lado, un bloque más pequeño aumenta el número de nodos y punteros, lo que aumenta el costo espacial, pero reduce el costo de acceso a elementos individuales dentro del bloque.
 
-#### Bloque 5 - Adaptadores y estructuras derivadas
-
-Revisen:
-
-- `Semana3/include/LinkedStack.h`
-- `Semana3/include/LinkedQueue.h`
-- `Semana3/include/LinkedDeque.h`
-- `Semana3/include/MinStack.h`
-- `Semana3/include/MinQueue.h`
-- `Semana3/include/MinDeque.h`
-- `Semana3/demos/demo_linked_adapters.cpp`
-- `Semana3/demos/demo_min_structures.cpp`
-
-Respondan:
+#### Bloque 5
 
 1. LinkedStack usa un objeto SLList para almacenar los elementos de la pila. Las operaciones de pila como push, pop y top se implementan utilizando de SLList push, pop y peek.
 2. LinkedQueue usa un objeto SLList para almacenar los elementos de la cola. Las operaciones de cola como add, remove y front se implementan utilizando de SLList add, remove y peek.
@@ -103,28 +90,35 @@ Respondan:
 7. Implementar una estructura como MinDeque requiere diseñar una nueva estructura que almacene información adicional para mantener el mínimo, mientras que adaptar una estructura existente como LinkedStack implica reutilizar la lógica de SLList para implementar la funcionalidad de pila sin modificar la estructura base.
 8. Las operaciones de push, pop, add, remove, front, back, removeFirst y removeLast pueden defenderse como O(1) para LinkedStack, LinkedQueue y LinkedDeque. En MinQueue y MinDeque, las operaciones de front, remove, back, removeFirst y removeLast el rebalanceo puede ser O(n) en el peor caso, pero es amortizado O(1) porque ocurre con poca frecuencia.
 
-#### Bloque 6 - Deng como refuerzo algorítmico y puente de integración
+#### Bloque 6
 
-Revisen:
+1.
+- size: Devuelve el número de elementos en la lista.
+- empty: Verifica si la lista está vacía.
+- clear: Elimina todos los elementos de la lista.
+- push_front: Agrega un elemento al frente de la lista.
+- push_back: Agrega un elemento al final de la lista.
+- add: Agrega un elemento a la lista  en una posición específica.
+- front: Devuelve el primer elemento de la lista.
+- back: Devuelve el último elemento de la lista.
+- get: Devuelve el elemento en una posición específica.
+- set: Establece el valor de un elemento en una posición específica.
+- remove: Elimina un elemento en una posición específica.
+- contains: Verifica si un elemento está presente en la lista.
+- find_index: Devuelve el índice de un elemento específico en la lista.
+- sort: Ordena los elementos de la lista.
+- dedup: Elimina elementos duplicados de la lista.
+- uniquify: Elimina elementos duplicados consecutivos de la lista.
+- reverse: Invierte el orden de los elementos en la lista.
 
-- `Semana3/include/CleanList.h`
-- `Semana3/include/DengList.h`
-- `Semana3/include/MorinDengBridge.h`
-- `Semana3/demos/demo_deng_list.cpp`
-- `Semana3/demos/demo_morin_deng_bridge.cpp`
-- `Semana3/pruebas_publicas/test_public_deng_bridge.cpp`
-- `Semana3/pruebas_internas/test_internal_deng_algorithms.cpp`
-- `Parte3-Deng.pdf`
-
-Respondan:
-
-1. ¿Qué operaciones del ADT de lista aparecen reforzadas en `DengList`?
-2. ¿Qué ventaja tiene encapsular una lista más rica sin cambiar el resto de estructuras de Semana 3?
-3. Expliquen qué hacen `to_deng` y `assign_from_deng`.
-4. Expliquen por qué `stable_sort_with_deng` no obliga a reimplementar ordenamiento dentro de `DLList` o `SEList`.
-5. Expliquen qué hace `dedup_with_deng` y qué relación guarda con `deduplicate()` o `uniquify()` de la teoría.
-6. Expliquen por qué `reverse_with_deng` es un ejemplo de reutilización de algoritmos sobre una interfaz común.
-7. ¿Qué costo adicional introduce la conversión entre estructuras y cuándo vale la pena aceptarlo?
+2. Permite reutilizar la lógica de las estructuras de la semana 3 sin modificar su implementación, lo que facilita la integración en la resolución de problemas más complejos.
+3.
+- to_deng es una función que toma una lista de tipo DLList o SEList y crea un DengList mediante la asignación de elementos. 
+- assign_from_deng es una función que toma un DengList y asigna sus elementos a una lista de tipo DLList o SEList, primero limpiando la lista de destino y luego agregando los elementos del DengList.
+4. stable_sort_with_deng no obliga a reimplementar el ordenamiento dentro de DLList o SEList porque crea un objeto temporal DengList y lo ordena para luego convertir y retornar la respuesta al tipo original.
+5. Similar a stable_sort_with_deng, dedup_with_deng crea un objeto temporal DengList para eliminar los elementos duplicados de la lista original, lo que permite reutilizar la lógica de eliminación de duplicados sin modificar la estructura base. La relación con deduplicate() o uniquify() es que dedup_with_deng implementa una funcionalidad similar a estas funciones, aunque uniquify solo elimina duplicados consecutivos, mientras dedup_with_deng elimina todos los duplicados similar a deduplicate.
+6. Similar a stable_sort_with_deng y dedup_with_deng, reverse_with_deng crea un objeto temporal DengList para invertir el orden de los elementos de la lista original usando reverse de DengList, lo que permite reutilizar la lógica de inversión sin modificar la estructura base. 
+7. El costo adicional de la conversión entre estructuras es O(n) debido a la necesidad de recorrer todos los elementos para convertirlos de un tipo a otro dos veces. En general no valdría la pena aceptarlo, pero si se tiene que hacer una nueva estructura más compleja podría considerarse aceptable el costo amortizado sobre el de implementación de lógica en la estructura original.
 
 #### Bloque 7 - Comparación enlazado vs contiguo, variantes y evidencia experimental
 
