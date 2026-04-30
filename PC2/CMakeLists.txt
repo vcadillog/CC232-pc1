@@ -6,14 +6,14 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_library(pc2_headers INTERFACE)
-target_include_directories(pc2_headers INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
-target_compile_features(pc2_headers INTERFACE cxx_std_17)
+add_library(algorithms STATIC
+    "src/DLList.cpp"
+    "src/MultiLevelDLList.cpp"
+)
 
-function(cc232_add_pc2_target target_name source_file)
-  add_executable(${target_name} "${source_file}")
-  target_link_libraries(${target_name} PRIVATE pc2_headers)
-endfunction()
+add_compile_options(-Wall -Wextra -Wpedantic)
 
-cc232_add_pc2_target(pc2_demo_create_adt "demos/create_adt.cpp")
+target_include_directories(algorithms PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
+add_executable(pc2_demo_create_adt "demos/create_adt.cpp")
+target_link_libraries(pc2_demo_create_adt PRIVATE algorithms)
