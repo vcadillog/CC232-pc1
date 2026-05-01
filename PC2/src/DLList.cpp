@@ -27,21 +27,6 @@ DLList<T>& DLList<T>::operator=(const DLList& other) {
 }
 
 template<class T>
-DLList<T>::DLList(DLList&& other) noexcept : DLList() {
-    if (!other.empty()) {
-        dummy.next = other.dummy.next;
-        dummy.prev = other.dummy.prev;
-        dummy.next->prev = &dummy;
-        dummy.prev->next = &dummy;
-        n = other.n;
-
-        other.dummy.next = &other.dummy;
-        other.dummy.prev = &other.dummy;
-        other.n = 0;
-    }
-}
-
-template<class T>
 DLList<T>& DLList<T>::operator=(DLList&& other) noexcept {
     if (this != &other) {
         clear();
@@ -59,6 +44,38 @@ DLList<T>& DLList<T>::operator=(DLList&& other) noexcept {
     }
     return *this;
 }
+
+template<class T>
+bool DLList<T>::operator==(const DLList& other) const {
+    if (n != other.n) return false;
+
+    const Node* a = dummy.next;
+    const Node* b = other.dummy.next;
+
+    while (a != &dummy && b != &other.dummy) {
+        if (a->x != b->x) return false;
+        a = a->next;
+        b = b->next;
+    }
+
+    return a == &dummy && b == &other.dummy;
+}
+
+template<class T>
+DLList<T>::DLList(DLList&& other) noexcept : DLList() {
+    if (!other.empty()) {
+        dummy.next = other.dummy.next;
+        dummy.prev = other.dummy.prev;
+        dummy.next->prev = &dummy;
+        dummy.prev->next = &dummy;
+        n = other.n;
+
+        other.dummy.next = &other.dummy;
+        other.dummy.prev = &other.dummy;
+        other.n = 0;
+    }
+}
+
 
 template<class T>
 DLList<T>::~DLList() {

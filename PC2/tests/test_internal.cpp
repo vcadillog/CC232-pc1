@@ -1,4 +1,5 @@
 #include "MultiLevelDLList.h"
+#include <cassert>
 #include <iostream>
 
 using namespace ods;
@@ -27,86 +28,82 @@ int main() {
     child2->add(12);
   }
 
-  std::cout << list.size() << " nodos en total\n";
-  std::cout << list.checkSize() << " checkSize\n";
-
-  auto *failChild = list.addChild(2);
-  if (failChild == nullptr) {
-    std::cout << "Restricción: no duplicó child\n";
-  }
-
+  assert(list.checkSize());
   DLList<int> result = list.flatten();
 
-  std::cout << "Flatten: ";
-  for (int i = 0; i < result.size(); i++) {
-    std::cout << result.get(i) << " ";
+  DLList<int> dllist1;
+  for (int i = 1; i <= 3; i++) {
+    dllist1.add(i);
   }
-  std::cout << "\n";
-
-  int expected1[] = {1, 2, 3, 7, 8, 11, 12, 9, 10, 4, 5, 6};
-  bool ok = true;
-
-  if (result.size() != 12) ok = false;
-
-  for (int i = 0; i < result.size(); i++) {
-    if (result.get(i) != expected1[i]) {
-      ok = false;
-      break;
-    }
+  for (int i = 7; i <= 8; i++) {
+    dllist1.add(i);
   }
-
-  std::cout << "Resultado: " << (ok ? "Correcto" : "Fallo") << "\n";
+  for (int i = 11; i <= 12; i++) {
+    dllist1.add(i);
+  }
+  for (int i = 9; i <= 10; i++) {
+    dllist1.add(i);
+  }
+  for (int i = 4; i <= 6; i++) {
+    dllist1.add(i);
+  }
+  assert(result == dllist1);
+  assert(result.size() == dllist1.size());
+  assert(result.size() == 12);
+  assert(result.checkSize());
 
   list.remove(2);
 
-  std::cout << list.size() << " nodos en total\n";
-  std::cout << list.checkSize() << " checkSize\n";
-
   DLList<int> result2 = list.flatten();
-
-  std::cout << "Después de remove(2): ";
-  for (int i = 0; i < result2.size(); i++) {
-    std::cout << result2.get(i) << " ";
+  DLList<int> dllist2;
+  for (int i = 1; i <= 6; i++) {
+    dllist2.add(i);
   }
-  std::cout << "\n";
+  dllist2.remove(2);
+  assert(list == dllist2);
+  assert(list.size() == dllist2.size());
+  assert(list.size() == 5);
+  assert(list.checkSize());
 
-  int expected2[] = {1, 2, 4, 5, 6};
-
-  bool ok2 = (result2.size() == 5);
-  for (int i = 0; i < result2.size(); i++) {
-    if (result2.get(i) != expected2[i]) {
-      ok2 = false;
-      break;
-    }
-  }
-
-  std::cout << "Resultado: " << (ok2 ? "Correcto" : "Fallo") << "\n";
-
-  std::string input = "[1,2,3,4,5,6,null,null,null,7,8,9,10,null,null,11,12]";
-
-  std::cout << "Input: " << input << "\n";
-
+  std::string input = "[1,2,3,4,5,6,null,null,null,7,8,9,10,null,null,11,12,"
+                      "null,13,14,15,null,null,16,17,"
+                      "null,18,19,null,null,20,21]";
+  std::cout << input << "\n";
   MultiLevelDLList<int> list2;
-
   list2.buildFromString(input);
-
-  std::cout << list2.size() << " nodos en total\n";
-  std::cout << list2.checkSize() << " checkSize\n";
-
+  list2.print();
+  // 1,2,3,7,8,11,13,14,16,18,19,20,21,17,15,12,9,10,4,5,6
   DLList<int> result3 = list2.flatten();
+  DLList<int> dllist3;
+  dllist3.add(1);
+  dllist3.add(2);
+  dllist3.add(3);
+  dllist3.add(7);
+  dllist3.add(8);
+  dllist3.add(11);
+  dllist3.add(13);
+  dllist3.add(14);
+  dllist3.add(16);
+  dllist3.add(18);
+  dllist3.add(19);
+  dllist3.add(20);
+  dllist3.add(21);
+  dllist3.add(17);
+  dllist3.add(15);
+  dllist3.add(12);
+  dllist3.add(9);
+  dllist3.add(10);
+  dllist3.add(4);
+  dllist3.add(5);
+  dllist3.add(6);
 
-  std::cout << "Flatten: ";
-  for (int i = 0; i < result3.size(); i++) {
-    std::cout << result3.get(i) << " ";
-  }
-  std::cout << "\n";
-
-  bool ok3 = (result3.size() == 12);
-  std::cout << "Resultado: " << (ok3 ? "Correcto" : "Fallo") << "\n";
+  assert(result3 == dllist3);
+  assert(result3.size() == dllist3.size());
+  assert(result3.size() == 21);
+  assert(result3.checkSize());
 
   list2.clear();
-  std::cout << list2.size() << " nodos en total\n";
-  std::cout << list2.checkSize() << " checkSize\n";
+  assert(list2.size() == 0);
 
   return 0;
 }

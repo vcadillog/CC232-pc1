@@ -59,7 +59,7 @@ int main() {
   }
   std::cout << "\n\n";
 
-  std::cout << "Creación con del DLList multinivel usando un string\n";
+  std::cout << "Creación del DLList multinivel usando un string\n";
   //std::string input = "[1,2,3,4,5,6,null,null,null,7,8,9,10,null,null,11,12]";
   std::string input = "[1,2,3,4,5,6,null,null,null,null,7,8,9,10,null,null,null,11,12,13,14]";
 

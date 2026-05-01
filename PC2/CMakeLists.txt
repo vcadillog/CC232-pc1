@@ -17,3 +17,8 @@ target_include_directories(algorithms PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/includ
 
 add_executable(pc2_demo_create_adt "demos/create_adt.cpp")
 target_link_libraries(pc2_demo_create_adt PRIVATE algorithms)
+
+add_executable(test_internal "tests/test_internal.cpp")
+target_link_libraries(test_internal PRIVATE algorithms)
+
+add_test(NAME pc2_test_internal COMMAND test_internal)

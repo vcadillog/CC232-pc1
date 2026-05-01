@@ -25,6 +25,7 @@ public:
     DLList();
     DLList(const DLList& other);
     DLList& operator=(const DLList& other);
+    bool operator==(const DLList& other) const;
 
     DLList(DLList&& other) noexcept;
     DLList& operator=(DLList&& other) noexcept;
