@@ -75,3 +75,9 @@
 ### Bloque 7
 
 Cuando cambiamos de arreglo a una estructura basada en arreglos, la representación cambia a una estructura de datos que maneja un arreglo interno para almacenar los elementos, pero con una interfaz que permite operaciones dinámicas como agregar o eliminar elementos sin preocuparse por la gestión de memoria. La correctitud se asegura mediante el diseño de la interfaz y la implementación de las operaciones, garantizando que las operaciones se comporten según lo esperado. El costo amortizado se mantiene en O(1). En cuanto al uso de espacio, RootishArrayStack es más eficiente en términos de espacio que ArrayStack o FastArrayStack, ya que no necesitan reservar el doble del espacio cada vez que se redimensionan, sino que lo hacen de manera adaptativa en bloques según el tamaño actual del arreglo. FastArrayStack tiene una implementación más eficiente debido al uso de funciones optimizadas de la STL. 
+
+#### Autoevaluación breve
+
+- Qué podemos defender con seguridad: Entendemos el marco conceptual de una estructura basada en arreglos, las ventajas de un tipo de estructura sobre otro.
+- Qué todavía confundimos: El costo amortizado en una estructura.
+- Qué evidencia usaríamos en una sustentación: Observables concretos como size, uso de los métodos para operaciones LIFO y FIFO, comparación entre métodos.
