@@ -22,14 +22,13 @@ public:
   MultiLevelDLList();
   ~MultiLevelDLList();
 
-  void incrementUp(int k = 1);
+  void incrementUp(int k);
   void decrementUp(int k);
 
   void add(int i, const T &x);
   void add(const T &x);
 
   MultiLevelDLList<T> *addChild(int i);
-  bool hasChild(int i);
 
   void removeNode(Node *w);
   T remove(int i);

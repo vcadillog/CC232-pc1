@@ -12,7 +12,7 @@
 
 ### Tema principal
 - Semana: 4
-- Estructura o técnica principal: Listas doblemente enlazada con busqueda DFS
+- Estructura o técnica principal: Listas doblemente enlazada
 
 ### Resumen de la solución
 El problema nos da una lista doblemente enlazada con múltiples niveles y nos pide que lo aplanemos, es decir pasarlo a una lista doblemente enlazada (sin niveles) y el orden que debe seguir al ser aplanada es que a un nodo padre le siga su nodo hijo y los asociados a su nodo hijo, hasta que encuentre otro nodo hijo y así recursivamente, cuando ya no encuentre más hijos retornar al nivel anterior y colocar los nodos posteriores al salto de nivel.
@@ -36,7 +36,7 @@ Para la función principal flatten:
 - Espacio: O(n+h), h es la pila de la recursión.
 
 ### Invariante o idea clave
-El invariante de flatten es que mantiene el número total de nodos de la estructura multinivel.
+El invariante de flatten es que el número total de nodos de la estructura multinivel es igual al número de nodos de la estructura aplanada.
 
 ### Archivos relevantes
 - include/

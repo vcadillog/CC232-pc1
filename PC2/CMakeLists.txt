@@ -17,8 +17,8 @@ add_compile_options(-Wall -Wextra -Wpedantic)
 
 target_include_directories(algorithms PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
-add_executable(pc2_demo_create_adt "demos/demo_multileveldllist.cpp")
-target_link_libraries(pc2_demo_create_adt PRIVATE algorithms)
+add_executable(pc2_demo_multileveldllist "demos/demo_multileveldllist.cpp")
+target_link_libraries(pc2_demo_multileveldllist PRIVATE algorithms)
 
 add_executable(test_internal "tests/test_internal.cpp")
 target_link_libraries(test_internal PRIVATE algorithms)

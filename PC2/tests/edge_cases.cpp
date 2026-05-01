@@ -18,6 +18,14 @@ int main() {
   list.clear();
   assert(list.size() == 0);
 
+  list.add(1);
+  dllist.add(1);
+  assert(list == dllist);
+  assert(list.size() == dllist.size());
+  assert(list.size() == 1);
+  dllist.clear();
+  list.clear();
+
   std::string input = "[]";
   list.buildFromString(input);
   result = list.flatten();
@@ -81,5 +89,19 @@ int main() {
   dllist.remove(4);
   assert(list == dllist);
   assert(list.size() == 4);
+
+  list.clear();
+  dllist.clear();
+  //
+  input = "[1,2,3,4,5,6,null,7,null,8,null,9,null,10]";
+  result = list.buildFromString(input);
+  // [2,3,4,5,6]
+  result.remove(0);
+  for (int i = 2; i <= 6; i++) {
+    dllist.add(i);
+  }
+  assert(result == dllist);
+  assert(result.size() == dllist.size());
+  assert(result.size() == 5);
   return 0;
 }

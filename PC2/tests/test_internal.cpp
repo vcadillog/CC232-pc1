@@ -107,5 +107,13 @@ int main() {
   list.clear();
   assert(list.size() == 0);
 
+
+  input = "[1,2,3, null,13,14,15,null,16,17,null,18,19,null,null,20,21]";
+  // [1,13,16,18,19,20,21,17,14,15,2,3]
+  list.buildFromString(input);
+  assert(list.size() == 12);
+  result = list.flatten();
+  assert(list.size() == result.size());
+
   return 0;
 }

@@ -60,10 +60,6 @@ template <class T> MultiLevelDLList<T> *MultiLevelDLList<T>::addChild(int i) {
   return child;
 }
 
-template <class T> bool MultiLevelDLList<T>::hasChild(int i) {
-  return getChild(this->getNode(i)) != nullptr;
-}
-
 template <class T> void MultiLevelDLList<T>::removeNode(Node *w) {
   int removed = 1;
 
@@ -265,7 +261,22 @@ template <class T> void MultiLevelDLList<T>::print() const {
     if (lvl.size() <= cur.pos)
       lvl.resize(cur.pos + 1, "null");
 
-    lvl[cur.pos] = std::to_string(cur.node->x);
+    // lvl[cur.pos] = std::to_string(cur.node->x);
+    Node *nd = cur.node;
+    std::string prev_s;
+    std::string next_s;
+    if (nd->prev == &cur.list->dummy) {
+      prev_s = "dummy";
+    } else {
+      prev_s = std::to_string(cur.node->prev->x);
+    }
+    if (nd->next == &cur.list->dummy) {
+      next_s = "dummy";
+    } else {
+      next_s = std::to_string(cur.node->next->x);
+    }
+    lvl[cur.pos] =
+        std::to_string(cur.node->x) + "(p:" + prev_s + "|n:" + next_s + ")";
 
     auto it = cur.list->children.find(cur.node);
     if (it == cur.list->children.end())
@@ -293,7 +304,7 @@ template <class T> void MultiLevelDLList<T>::print() const {
     std::cout << "[";
 
     for (size_t i = 0; i < lvl.size(); i++) {
-      std::cout << std::setw(6) << lvl[i];
+      std::cout << std::setw(15) << lvl[i];
       if (i + 1 < lvl.size())
         std::cout << ", ";
     }
@@ -301,7 +312,5 @@ template <class T> void MultiLevelDLList<T>::print() const {
     std::cout << "]\n";
   }
 }
-
 template class MultiLevelDLList<int>;
-
 } // namespace ods
