@@ -34,6 +34,7 @@ public:
   void removeNode(Node *w);
   T remove(int i);
 
+  int baseSize() const;
   int size() const;
 
   bool checkSize() const;

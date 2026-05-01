@@ -1,8 +1,8 @@
 #include "MultiLevelDLList.h"
+#include "iomanip"
 #include <cassert>
 #include <cctype>
 #include <iostream>
-#include "iomanip"
 
 namespace ods {
 
@@ -91,6 +91,7 @@ template <class T> T MultiLevelDLList<T>::remove(int i) {
 }
 
 template <class T> int MultiLevelDLList<T>::size() const { return m; }
+template <class T> int MultiLevelDLList<T>::baseSize() const { return this->n; }
 
 template <class T> bool MultiLevelDLList<T>::checkSize() const {
   int total = 0;
@@ -235,69 +236,70 @@ MultiLevelDLList<T>::buildFromString(const std::string &input) {
 }
 
 template <class T> void MultiLevelDLList<T>::print() const {
-        using Node = typename DLList<T>::Node;
+  using Node = typename DLList<T>::Node;
 
-    struct Item {
-        const MultiLevelDLList<T>* list;
-        Node* node;
-        int pos;
-        int depth;
-    };
+  struct Item {
+    const MultiLevelDLList<T> *list;
+    Node *node;
+    int pos;
+    int depth;
+  };
 
-    std::vector<Item> stack;
-    std::vector<std::vector<std::string>> levels;
+  std::vector<Item> stack;
+  std::vector<std::vector<std::string>> levels;
 
-    int idx = 0;
-    for (Node* u = this->dummy.next; u != &this->dummy; u = u->next) {
-        stack.push_back({this, u, idx++, 0});
+  int idx = 0;
+  for (Node *u = this->dummy.next; u != &this->dummy; u = u->next) {
+    stack.push_back({this, u, idx++, 0});
+  }
+
+  while (!stack.empty()) {
+    auto cur = stack.back();
+    stack.pop_back();
+
+    if (levels.size() <= cur.depth)
+      levels.resize(cur.depth + 1);
+
+    auto &lvl = levels[cur.depth];
+
+    if (lvl.size() <= cur.pos)
+      lvl.resize(cur.pos + 1, "null");
+
+    lvl[cur.pos] = std::to_string(cur.node->x);
+
+    auto it = cur.list->children.find(cur.node);
+    if (it == cur.list->children.end())
+      continue;
+
+    const MultiLevelDLList<T> *child = it->second;
+
+    int childPos = cur.pos;
+
+    for (Node *c = child->dummy.next; c != &child->dummy; c = c->next) {
+      if (levels.size() <= cur.depth + 1)
+        levels.resize(cur.depth + 2);
+
+      auto &nextLvl = levels[cur.depth + 1];
+
+      if (nextLvl.size() <= childPos)
+        nextLvl.resize(childPos + 1, "null");
+
+      stack.push_back({child, c, childPos, cur.depth + 1});
+      childPos++;
+    }
+  }
+
+  for (auto &lvl : levels) {
+    std::cout << "[";
+
+    for (size_t i = 0; i < lvl.size(); i++) {
+      std::cout << std::setw(6) << lvl[i];
+      if (i + 1 < lvl.size())
+        std::cout << ", ";
     }
 
-    while (!stack.empty()) {
-        auto cur = stack.back();
-        stack.pop_back();
-
-        if (levels.size() <= cur.depth)
-            levels.resize(cur.depth + 1);
-
-        auto& lvl = levels[cur.depth];
-
-        if (lvl.size() <= cur.pos)
-            lvl.resize(cur.pos + 1, "null");
-
-        lvl[cur.pos] = std::to_string(cur.node->x);
-
-        auto it = cur.list->children.find(cur.node);
-        if (it == cur.list->children.end())
-            continue;
-
-        const MultiLevelDLList<T>* child = it->second;
-
-        int childPos = cur.pos;
-
-        for (Node* c = child->dummy.next; c != &child->dummy; c = c->next) {
-            if (levels.size() <= cur.depth + 1)
-                levels.resize(cur.depth + 2);
-
-            auto& nextLvl = levels[cur.depth + 1];
-
-            if (nextLvl.size() <= childPos)
-                nextLvl.resize(childPos + 1, "null");
-
-            stack.push_back({child, c, childPos, cur.depth + 1});
-            childPos++;
-        }
-    }
-
-    for (auto& lvl : levels) {
-        std::cout << "[";
-
-        for (size_t i = 0; i < lvl.size(); i++) {
-            std::cout <<std::setw(6)<< lvl[i];
-            if (i + 1 < lvl.size()) std::cout << ", ";
-        }
-
-        std::cout << "]\n";
-    }
+    std::cout << "]\n";
+  }
 }
 
 template class MultiLevelDLList<int>;
