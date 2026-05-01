@@ -137,17 +137,18 @@
 6. XorList demuestra como usando XOR puede reducir el espacio utilizado por los punteros al comprimir un puntero como referencia a sus punteros sucesor y anterior.
 7. La desventaja práctica de XorList es que el acceso a los elementos se vuelve más complejo y costoso, ya que para acceder a un nodo específico se necesita descomprimir el puntero sucesor y anterior.
 
-#### Bloque 8 - Cierre comparativo y preparación de sustentación
+#### Bloque 8 
 
-Respondan esta pregunta final:
+Cuando pasamos de un arreglo a una lista:
+- La representación en memoria cambia de contigua a enlazada por punteros.
+- Los arreglos son mejores en el acceso por rango comparados a las estructuras enlazadas.
+- Las estructuras enlazadas son mejores en las inserciones y eliminaciones comparados a los arreglos.
+- Mientras que SLList y DLList ofrecen inserciones y eliminaciones en O(1) en los extremos DLList implementa de forma natural un deque y SEList mejora la eficiencia espacial utilizando bloques de nodos y mantiene una complejidad amortizada de O(1), intenta mantener un equilibrio entre lista y arreglos.
+- Con las estructuras base se implementan lógicas Stack, Queue, Deque al separar la interfaz.
+- La representación contigua tiene costo de acceso por índice O(1) y la enlazada O(n), mientras que en inserciones es viceversa.
 
-¿Qué cambia cuando pasamos de "usar arreglos dinámicos" a "diseñar estructuras enlazadas y adaptadores sobre nodos"?
+#### Autoevaluación breve
 
-La respuesta debe incluir obligatoriamente:
-
-- Una afirmación sobre representación
-- Una afirmación sobre acceso por rango frente a acceso por posición
-- Una afirmación sobre inserciones y eliminaciones locales
-- Una afirmación sobre complejidad de `SLList`, `DLList` y `SEList`
-- Una afirmación sobre reutilización mediante adaptadores o puentes
-- Una comparación entre representación contigua y enlazada.
+- Qué puedo defender con seguridad: Entiendo los casos de uso de una estructura enlazada vs memoria contigua y los beneficios o limitaciones.
+- Qué todavía confundo: Sobre algunos costos y costo amortizado.
+-. Qué evidencia usaría en una sustentación: Benchmark, casos borde, casos de pruebas.
