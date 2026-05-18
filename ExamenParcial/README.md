@@ -441,20 +441,106 @@ Cuando n=0 entonces es un arreglo vacío y debe manejar el retorno de un arreglo
 ### Pregunta 7
 
 #### a)
-#### b)
-#### c)
-#### d)
-#### e)
-#### f)
-#### c)
-#### d)
+1. addFirst(x)
+Comportamiento observable: Inserta x al principio.
+Precondiciones: Ninguno
+Entrada: [a1,...an]
+Salida: Ninguna, es void. Pero debe hacer internamente: [x,a1,...an]
 
-<a name="target-item7"></a>
-### Pregunta 7
+2. addLast(x)
+Comportamiento observable: Inserta x al final.
+Precondiciones: Ninguno
+Entrada: [a1,...an]
+Salida: Ninguna, es void. Pero debe hacer internamente: [a1,...an,x]
 
-#### a)
+3. removeFirst()
+Comportamiento observable: Elimina el primer elemento y lo retorna
+Precondiciones: El deque no puede estar vacío. 
+Entrada: [a1,...an]
+Salida: a1. Además debe hacer internamente: [a2,...an]
+
+4. removeLast()
+Comportamiento observable: Elimina y retorna el último elemento.
+Precondiciones: El deque no puede estar vacío. 
+Entrada: [a1,...an]
+Salida: an. Además debe hacer internamente: [a1,...an-1]
+
+5. first()
+Comportamiento observable: Retorna el primer elemento.
+Precondiciones: El deque no puede estar vacío. 
+Entrada: [a1,...an]
+Salida: a1. 
+
+6. last()
+Comportamiento observable: Retorna el último elemento.
+Precondiciones: El deque no puede estar vacío. 
+Entrada: [a1,...an]
+Salida: an. 
+
+7. min()
+Comportamiento observable: Retorna el mínimo elemento.
+Precondiciones: El deque no puede estar vacío. 
+Entrada: [a1,...an]
+Salida: ax, tal que ax es min. 
+
+8. size()
+Comportamiento observable: Retorna la cantidad de elementos del deque.
+Precondiciones: Ninguno
+Entrada: [a1,...an]
+Salida: n, tal que n>=0
+
 #### b)
+
+Se implementa el MinDeque usando dos MinStack, que es una clase que utiliza un SLList y que almacena el minimo elemento de la lista en forma de pila.
+
 #### c)
+
+- Cada MinStack contiene sus mínimos.
+- MinDeque compara los mínimos de los dos MinStack.
+- Se rebalancea el deque manteniendo los mínimos.
+
 #### d)
+addFirst(x): O(1)
+addLast(x): O(1)
+removeFirst(): O(n), rebalancear cuesta O(n)
+removeLast(): O(n), rebalancear cuesta O(n)
+first(): O(n), en el peor caso llama a rebalancear
+last(): O(n), en el peor caso llama a rebalancear 
+min(): O(1)
+size(): O(1)
+
 #### e)
+
+Valores repetidos:
+Entrada: addFirst(5)
+Salida: deque: [5], min: 5
+Entrada: addLast(3)
+Salida: deque: [5,3], min: 3
+Entrada: addLast(3)
+Salida: deque: [5,3,3], min: 3
+Entrada: addFirst(3)
+Salida: deque: [3,5,3,3], min: 3
+Entrada: addLast(5)
+Salida: deque: [3,5,3,3,5], min: 3
+Entrada: first()
+Salida: 3
+Entrada: Last()
+Salida: 5
+Entrada: removeFirst()
+Salida: deque: [5,3,3,5], min: 3
+Entrada: removeLast()
+Salida: deque: [5,3,3], min: 3
+Entrada: removeFirst()
+Salida: deque: [3,3], min: 3
+
+Estructura vacía:
+first(): Ejecuta assert y da error
+last(): Ejecuta assert y da error
+removeFirst(): Ejecuta assert y da error
+removeLast(): Ejecuta assert y da error
+min(): Ejecuta assert y da error
+
 #### f)
+
+Una estructura que preserva el ADT sería una clase heredada de DLList.
+Un DLList es más simple de implementar y ejecuta todos las funciones en O(1) a excepción de min(), que tiene un costo de O(n), porque tiene que recorrer toda la lista; sin embargo a diferencia de MinDeque no tiene que rebalancear para mantener el invariante.
