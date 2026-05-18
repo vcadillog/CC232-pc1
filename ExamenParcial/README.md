@@ -6,13 +6,13 @@
 - Código: 20255514D
 
 ### Indice
-[Pregunta 1](#target-item1)
-[Pregunta 2](#target-item2)
-[Pregunta 3](#target-item3)
-[Pregunta 4](#target-item4)
-[Pregunta 5](#target-item5)
-[Pregunta 6](#target-item6)
-[Pregunta 7](#target-item7)
+- [Pregunta 1](#target-item1)
+- [Pregunta 2](#target-item2)
+- [Pregunta 3](#target-item3)
+- [Pregunta 4](#target-item4)
+- [Pregunta 5](#target-item5)
+- [Pregunta 6](#target-item6)
+- [Pregunta 7](#target-item7)
 
 <a name="target-item1"></a>
 ### Pregunta 1
@@ -127,6 +127,101 @@ power y fastPower tienen la misma respuesta, pero power al iterar un total de n 
 
 <a name="target-item3"></a>
 ### Pregunta 3
+
+#### a)
+
+```cpp
+//Estado inicial:
+    _size = 0
+    _capacity = 1
+//Llamada 1:
+
+    //Antes:
+    _size = 0
+    _capacity = 1
+    _size == _capacity -> Falso 
+    no redimensiona
+    //Elementos copiados: 0
+
+    //Después:
+    _size = 1
+    _capacity = 1
+
+
+//Llamada 2:
+
+    //Antes:
+    _size = 1
+    _capacity = 1
+    _size == _capacity -> Verdadero
+    redimensiona
+    //Elementos copiados: 1
+
+    //Después:
+    _size = 2
+    _capacity = 2
+
+
+//Llamada 3:
+
+    //Antes:
+    _size = 2
+    _capacity = 2
+    _size == _capacity -> Verdadero 
+    redimensiona
+    //Elementos copiados: 2
+
+    //Después:
+    _size = 2
+    _capacity = 4
+
+```
+
+#### b)
+Dada la condición de redimensionamiento que _size = _capacity y capacity crece al doble después de cada redimensionamiento entonces veamos la tabla:
+| Operación | Antes (tamaño, capacidad) | Después (tamaño, capacidad) | Redimensiona |
+| :--- | :---: | :---: | ---: |
+| Inicial   | 0, 1| -| -|
+| pushback1 | 0, 1| 1, 1| No|
+| pushback2 | 1, 1| 2, 2| Sí|
+| pushback3 | 2, 2| 3, 4| Sí|
+| pushback4 | 3, 4| 4, 4| No|
+| pushback5 | 4, 4| 5, 8| Sí|
+| pushback6 | 5, 8| 6, 8| No|
+| pushback7 | 6, 8| 7, 8| No|
+| pushback8 | 7, 8| 8, 8| No|
+| pushback9 | 8, 8| 9, 16| Si|
+
+Para n redimensiona cada 2^m+1<n, m es entero, m>=0 y n>1:
+Copia = 2^0 + 2^1 + 2^2 + ... + 2^m
+Esto es:
+$$
+\Copias = 2^(m+1)-1
+$$
+
+El peor caso es con 2^m = n, para
+$$
+\Copias <= 2n - 1
+$$
+
+#### c)
+
+De la cota de copias tenemos que el costo del total de inserciones es O(n), aunque algunos pushBack tenga costo de copiar O(n), este se distribuye entre los n pushback, entoces el costo amortizado es O(n/n) = O(1). 
+
+#### d)
+
+Porque hay un rango de _capacity/4 a _capacity/2 en el que no se ejecutará la reducción, veamos si desde el pushback 9 hacemos removeLast.
+| :--- | :---: | :---: | ---: |
+| pushback9 | 8, 8| 9, 16| Si|
+El removeLast solo ejecutará shrink cuando size<16/4=4 y a la vez no ejecutará incremento de capacidad hasta que _size=16, eso da para este caso un margen de size 4 a 15 sin llamar a redimensionamientos, este margen es proporcional al valor de _capacity.
+
+#### e)
+
+Sea la condición de shrink, _size<_capacity/K; esto causará oscilación para valores de 0<K<=2, veamos con el límite _capacity/2, veamos el caso pushback 9 nuevamente:
+| :--- | :---: | :---: | ---: |
+| pushback9 | 8, 8| 9, 16| Si|
+Aquí se incrementó el _capacity, pero si hacemos un removeLast _size=8, esto hará que en el siguiente pushback o removelast se incremente o reduzca _capacity, lo que nos daría un comportamiento oscilatorio, pero si se usa un condicional <= en su lugar oscila inmediatamente, sin tener que esperar una operación adicional.
+
 <a name="target-item4"></a>
 ### Pregunta 4
 <a name="target-item5"></a>
